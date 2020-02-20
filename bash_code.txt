@@ -1,0 +1,38 @@
+#!/bin/bash
+
+cd ./music;
+
+for ((i=1;i<=1;i++)); do
+
+echo -e "<html>\n <meta http-equiv="'"content-type"'" content="'"text/html; charset=utf-8"'" />""<body>\n<table border="'"1"'">\n <tr>\n  <th>Artist</th>\n  <th>Album</th>\n  <th>Tracks</th>\n </tr>";
+
+(for artist in $(find . -type f | cut -d"/" -f3 | sort | uniq | grep -Ev '^$|_'  | tr ' ' '_' | sed 's/[][]//g'); do 
+
+echo " <tr>";
+
+echo -e "$(find . -type f | tr ' ' '_' | sed 's/[][]//g' | grep "$artist" | cut -d"/" -f4 | sort | uniq | wc -l | sed 's/$/">/' | sed 's/^/  <td rowspan="/') " "$artist" | sed 's/$/<\/td>/'; 
+
+(for album in $(find . -type f | tr ' ' '_' | sed 's/[][]//g' | grep "$artist" | cut -d"/" -f3-4 | sort | uniq); do
+
+echo "$album" | cut -d"/" -f2 | sed 's/^/  <td>/' | sed 's/$/<\/td>/';
+echo "  <td>";
+echo "   <table border="'"0"'">";
+
+(for path in $(find ../Music -type f | tr ' ' '_' | cut -d"/" -f2-7 | grep "$album" | sort); do
+if [[ $path == *disk* ]] ;
+then
+track=$(find ../Music -type f | tr ' ' '_' | cut -d"/" -f2-7 | grep "$path" | sort | cut -d"/" -f6 | sed 's/$/<\/a><\/td><\/tr>/' | sed 's/.ogg//' | sed 's/^/">/');
+else 
+track=$(find ../Music -type f | tr ' ' '_' | cut -d"/" -f2-7 | grep "$path" | sort | cut -d"/" -f5 | sed 's/$/<\/a><\/td><\/tr>/' | sed 's/.ogg//' | sed 's/^/">/');
+fi;
+
+echo "$path""$track" | sed 's/^/    <tr><td><a href="/';
+done); 
+
+echo "   </table>";
+echo "  </td>";
+echo " </tr>";
+done;);
+done | tr '_' ' ';)
+echo -e "</table>\n</body>";
+done
