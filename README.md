@@ -10,8 +10,8 @@ Having ripped my CDs to disk, I would like to run a media server on my home netw
 
 ### Prerequisites
 
-Bash
-Perl
+Bash,
+Perl,
 Unix
 
 
@@ -22,8 +22,8 @@ Run music.pl (perl script) and/or bash script to get expected output
 
 ## Built With
 
-* [Perl](https://www.perl.org/get.html) - highly capable, feature-rich language
-* [Bash](https://www.gnu.org/software/bash/) - Unix shell and command language
+* [Perl](https://www.perl.org/get.html) - Highly capable, feature-rich programming language
+* [Bash](https://www.gnu.org/software/bash/) - Unix shell and command programming language
 
 
 ## Authors
